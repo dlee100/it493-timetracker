@@ -228,6 +228,7 @@ $i18n_key_words = array(
 'label.entity' => 'Entity',
 'label.type' => 'Type',
 'label.type_dropdown' => 'dropdown',
+'label.type_float' => 'Float',
 'label.type_text' => 'text',
 'label.required' => 'Required',
 'label.fav_report' => 'Favorite report',

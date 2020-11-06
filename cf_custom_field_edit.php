@@ -64,7 +64,8 @@ if ($err->no()) {
 
   $form->addInput(array('type'=>'combobox','name'=>'type','value'=>$field['type'],
     'data'=>array(CustomFields::TYPE_TEXT=>$i18n->get('label.type_text'),
-                  CustomFields::TYPE_DROPDOWN=>$i18n->get('label.type_dropdown'))));
+                  CustomFields::TYPE_DROPDOWN=>$i18n->get('label.type_dropdown'),
+                  CustomFields::TYPE_FLOAT=>$i18n->get('label.type_float'))));
   $form->addInput(array('type'=>'checkbox','name'=>'required','value'=>$field['required']));
   $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->get('button.save')));
 }
