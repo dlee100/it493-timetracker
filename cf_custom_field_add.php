@@ -63,7 +63,6 @@ $form->addInput(array('type'=>'combobox','name'=>'type',
                 CustomFields::TYPE_FLOAT=>$i18n->get('label.type_float'))
 ));
 $form->addInput(array('type'=>'checkbox','name'=>'required'));
-$form->addInput(array('type'=>'checkbox','name'=>'required'));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
 if ($request->isPost()) {
