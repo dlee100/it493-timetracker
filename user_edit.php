@@ -175,6 +175,8 @@ $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','for
 if ($show_quota)
   $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'quota_percent','format'=>'.2','value'=>$cl_quota_percent));
 
+$form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'vacation_accrual_rate','format'=>'.2','value'=>$cl_vacation_accrual_rate));
+
 // Define classes for the projects table.
 class NameCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
