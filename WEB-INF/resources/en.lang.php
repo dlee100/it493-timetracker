@@ -228,6 +228,7 @@ $i18n_key_words = array(
 'label.entity' => 'Entity',
 'label.type' => 'Type',
 'label.type_dropdown' => 'dropdown',
+'label.type_float' => 'float',
 'label.type_text' => 'text',
 'label.required' => 'Required',
 'label.fav_report' => 'Favorite report',
@@ -524,6 +525,7 @@ $i18n_key_words = array(
 'form.users.comanager' => 'Co-manager',
 'form.users.rate' => 'Rate',
 'form.users.default_rate' => 'Default hourly rate',
+'form.users.vacation_accrual_rate' => 'Vacation accrual rate',
 
 // Editing User form. See example at https://timetracker.anuko.com/user_edit.php
 'form.user_edit.swap_roles' => 'Swap roles',

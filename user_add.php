@@ -114,14 +114,21 @@ if ($user->isPluginEnabled('cl'))
 if ($custom_fields && $custom_fields->userFields) {
   foreach ($custom_fields->userFields as $userField) {
     $field_name = 'user_field_'.$userField['id'];
-    if ($userField['type'] == CustomFields::TYPE_TEXT) {
+    if ($userField['type'] == CustomFields::TYPE_TEXT) 
+    {
       $form->addInput(array('type'=>'text','name'=>$field_name,'value'=>$userCustomFields[$userField['id']]['value']));
-    } elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) {
+    } 
+    elseif ($userField['type'] == CustomFields::TYPE_DROPDOWN) 
+    {
       $form->addInput(array('type'=>'combobox','name'=>$field_name,
       'style'=>'width: 250px;',
       'data'=>CustomFields::getOptions($userField['id']),
       'value'=>$userCustomFields[$userField['id']]['value'],
       'empty'=>array(''=>$i18n->get('dropdown.select'))));
+    }
+    elseif ($userField['type'] == CustomFields::TYPE_FLOAT) 
+    {
+      $form->addInput(array('type'=>'floatfield','name'=>$field_name, 'value'=>$userCustomFields[$userField['id']]['value']));
     }
   }
 }
@@ -129,6 +136,8 @@ if ($custom_fields && $custom_fields->userFields) {
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','format'=>'.2','value'=>$cl_rate));
 if ($show_quota)
   $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'quota_percent','format'=>'.2','value'=>$cl_quota_percent));
+
+$form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'vacation_accrual_rate', 'format'=>'.2', 'value'=>$cl_vacation_accrual_rate));  
 
 $show_projects = MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode();
 if ($show_projects) {
@@ -209,7 +218,8 @@ if ($request->isPost()) {
         'role_id' => $cl_role_id,
         'client_id' => $cl_client_id,
         'projects' => $assigned_projects,
-        'email' => $cl_email);
+        'email' => $cl_email,
+        'vacation_accrual_rate' => $cl_vacation_accrual_rate);
       $user_id = ttUserHelper::insert($fields);
 
       // Insert user custom fields if we have them.

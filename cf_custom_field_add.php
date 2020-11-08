@@ -59,10 +59,13 @@ $form->addInput(array('type'=>'combobox','name'=>'entity',
 ));
 $form->addInput(array('type'=>'combobox','name'=>'type',
   'data'=>array(CustomFields::TYPE_TEXT=>$i18n->get('label.type_text'),
-                CustomFields::TYPE_DROPDOWN=>$i18n->get('label.type_dropdown'))
+                CustomFields::TYPE_DROPDOWN=>$i18n->get('label.type_dropdown'),
+                CustomFields::TYPE_FLOAT=>$i18n->get('label.type_float'))
 ));
 $form->addInput(array('type'=>'checkbox','name'=>'required'));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
+
+echo "Hello world!<br>";
 
 if ($request->isPost()) {
   // Validate user input.

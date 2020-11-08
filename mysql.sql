@@ -93,6 +93,7 @@ CREATE TABLE `tt_users` (
   `role_id` int(11) default NULL,                  # role id
   `client_id` int(11) default NULL,                # client id for "client" user role
   `rate` float(6,2) NOT NULL default '0.00',       # default hourly rate
+  `vacation_accrual_rate` float(6,2) NOT NULL default '0.00',       # default vacation accrual rate
   `quota_percent` float(6,2) NOT NULL default '100.00', # percent of time quota
   `email` varchar(100) default NULL,               # user email
   `created` datetime default NULL,                 # creation timestamp

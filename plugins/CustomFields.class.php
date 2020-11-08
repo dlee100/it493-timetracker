@@ -35,6 +35,7 @@ class CustomFields {
     const ENTITY_PROJECT = 3; // Field is associated with projects.
     const TYPE_TEXT = 1;      // A text field.
     const TYPE_DROPDOWN = 2;  // A dropdown field with pre-defined values.
+    const TYPE_FLOAT = 3;     // A float field.
 
     // TODO: replace $fields with entity-specific arrays: timeFields, userFields, etc.
 
@@ -381,9 +382,10 @@ class CustomFields {
         $type = $timeField['type'];
         $option_id = $type == CustomFields::TYPE_DROPDOWN ? (int) $timeField['value'] : null;
         $value = $type == CustomFields::TYPE_TEXT ? $timeField['value'] : null;
+        $floatValue = $type == CustomFields::TYPE_FLOAT ? $timeField['value'] : null;
 
         // Do not insert empty fields.
-        if (($type == CustomFields::TYPE_DROPDOWN && !$option_id) || ($type == CustomFields::TYPE_TEXT && !$value))
+        if (($type == CustomFields::TYPE_DROPDOWN && !$option_id) || ($type == CustomFields::TYPE_TEXT && !$value) || ($type == CustomFields::TYPE_FLOAT && !$floatValue))
             return true;
 
         // TODO: add a join to protect from bogus option_ids in post.
@@ -417,9 +419,10 @@ class CustomFields {
         $type = $entityField['type'];
         $option_id = $type == CustomFields::TYPE_DROPDOWN ? (int) $entityField['value'] : null;
         $value = $type == CustomFields::TYPE_TEXT ? $entityField['value'] : null;
+        $floatValue = $type == CustomFields::TYPE_FLOAT ? $timeField['value'] : null;
 
         // Do not insert empty fields.
-        if (($type == CustomFields::TYPE_DROPDOWN && !$option_id) || ($type == CustomFields::TYPE_TEXT && !$value))
+        if (($type == CustomFields::TYPE_DROPDOWN && !$option_id) || ($type == CustomFields::TYPE_TEXT && !$value) || ($type == CustomFields::TYPE_FLOAT && !$floatValue))
             return true;
 
         // TODO: add a join to protect from bogus option_ids in post.
@@ -493,6 +496,8 @@ class CustomFields {
                     return $val['option_id'];
                 if (CustomFields::TYPE_TEXT == $type)
                     return $val['value'];
+                if (CustomFields::TYPE_FLOAT == $type)
+                    return $val['floatValue'];    
             }
         }
         return null;
@@ -517,6 +522,8 @@ class CustomFields {
                     return $val['option_id'];
                 if (CustomFields::TYPE_TEXT == $type)
                     return $val['value'];
+                if (CustomFields::TYPE_FLOAT == $type)
+                    return $val['floatValue'];     
             }
         }
         return null;
