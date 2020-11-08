@@ -82,7 +82,7 @@ INSERT INTO `tt_roles` (`group_id`, `name`, `rank`, `rights`) VALUES (0, 'Top ma
 
 #
 # Structure for table tt_users. This table is used to store user properties.
-#
+## LOOK AT THIS - Daniel
 CREATE TABLE `tt_users` (
   `id` int(11) NOT NULL auto_increment,            # user id
   `login` varchar(50) COLLATE utf8mb4_bin NOT NULL,# user login
@@ -95,6 +95,8 @@ CREATE TABLE `tt_users` (
   `rate` float(6,2) NOT NULL default '0.00',       # default hourly rate
   `vacation_accrual_rate` float(6,2) NOT NULL default '0.00',       # default vacation accrual rate
   `quota_percent` float(6,2) NOT NULL default '100.00', # percent of time quota
+  `pto_accrual` float(6,2) NOT NULL default '0.00' # default PTO accrual rate
+  `sick_accrual` float(6,2) NOT NULL default '0.00' # default sick leave accrual
   `email` varchar(100) default NULL,               # user email
   `created` datetime default NULL,                 # creation timestamp
   `created_ip` varchar(45) default NULL,           # creator ip
