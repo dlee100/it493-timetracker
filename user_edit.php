@@ -164,7 +164,7 @@ if ($custom_fields && $custom_fields->userFields) {
     }
     elseif ($userField['type'] == CustomFields::TYPE_FLOAT) 
     {
-      $form->addInput(array('type'=>'float','name'=>$field_name, 'value'=>$userCustomFields[$userField['id']]['value']));
+      $form->addInput(array('type'=>'floatfield','name'=>$field_name, 'value'=>$userCustomFields[$userField['id']]['value']));
     }
   }
 }
