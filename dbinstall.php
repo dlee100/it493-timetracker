@@ -417,6 +417,7 @@ if ($_POST) {
     ttExecute("ALTER TABLE tt_users CHANGE u_name name varchar(100) default NULL");
     ttExecute("ALTER TABLE tt_users CHANGE u_email email varchar(100) default NULL");
     ttExecute("ALTER TABLE tt_users CHANGE u_rate rate float(6,2) NOT NULL default '0.00'");
+    ttExecute("ALTER TABLE tt_users CHANGE u_vacation_accrual_rate vacation_accrual_rate float(6,2) NOT NULL default '0.00'");
     ttExecute("update tt_users set u_active = NULL where u_active = 1000");
     ttExecute("ALTER TABLE tt_users CHANGE u_active status tinyint(4) default '1'");
     ttExecute("ALTER TABLE tt_teams ADD COLUMN status tinyint(4) default '1'");
