@@ -92,6 +92,7 @@ if ($request->isPost()) {
     }
   }
   $cl_rate = $request->getParameter('rate');
+  $cl_vacation_accrual_rate = $request->getParameter('vacation_accrual_rate');
   $cl_projects = $request->getParameter('projects');
   if (is_array($cl_projects)) {
     foreach ($cl_projects as $p) {
@@ -249,6 +250,7 @@ if ($request->isPost()) {
         'email' => $cl_email,
         'status' => $cl_status,
         'rate' => $cl_rate,
+        'vacation_accrual_rate' => $cl_vacation_accrual_rate,
         'quota_percent' => $cl_quota_percent,
         'projects' => $assigned_projects);
       if (in_array('manage_users', $user->rights) && $cl_role_id) {
