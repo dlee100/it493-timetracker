@@ -137,6 +137,8 @@ $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','for
 if ($show_quota)
   $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'quota_percent','format'=>'.2','value'=>$cl_quota_percent));
 
+$form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'vacation_accrual_rate', 'format'=>'.2', 'value'=>$cl_vacation_accrual_rate));  
+
 $show_projects = MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode();
 if ($show_projects) {
   $projects = ttGroupHelper::getActiveProjects();
@@ -216,7 +218,8 @@ if ($request->isPost()) {
         'role_id' => $cl_role_id,
         'client_id' => $cl_client_id,
         'projects' => $assigned_projects,
-        'email' => $cl_email);
+        'email' => $cl_email,
+        'vacation_accrual_rate' => $cl_vacation_accrual_rate);
       $user_id = ttUserHelper::insert($fields);
 
       // Insert user custom fields if we have them.
