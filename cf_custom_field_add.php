@@ -65,6 +65,8 @@ $form->addInput(array('type'=>'combobox','name'=>'type',
 $form->addInput(array('type'=>'checkbox','name'=>'required'));
 $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->get('button.add')));
 
+echo "Hello world!<br>";
+
 if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_field_name)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
