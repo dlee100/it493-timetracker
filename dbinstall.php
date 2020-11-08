@@ -584,7 +584,7 @@ if ($_POST) {
     ttExecute("ALTER TABLE tt_project_task_binds CHANGE ab_id_p project_id int(11) NOT NULL");
     ttExecute("ALTER TABLE tt_project_task_binds CHANGE ab_id_a task_id int(11) NOT NULL");
     ttExecute("RENAME TABLE user_bind TO tt_user_project_binds");
-    ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_rate rate float(6,2) NOT NULL default '0.00'");
+    ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_vacation_accrual_rate vacation_accrual_rate float(6,2) NOT NULL default '0.00'");
     ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_id_p project_id int(11) NOT NULL");
     ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_id_u user_id int(11) NOT NULL");
     ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_id id int(11) NOT NULL auto_increment");
