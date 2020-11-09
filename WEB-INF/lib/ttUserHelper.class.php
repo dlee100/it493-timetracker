@@ -202,7 +202,7 @@ class ttUserHelper {
     }
 
     $modified_part = ', modified = now(), modified_ip = '.$mdb2->quote($_SERVER['REMOTE_ADDR']).', modified_by = '.$user->id;
-    $parts = ltrim($login_part.$pass_part.$name_part.$role_part.$client_part.$rate_part.$quota_percent_part.$email_part.$modified_part.$status_part, ',');
+    $parts = ltrim($login_part.$pass_part.$name_part.$role_part.$client_part.$rate_part.$vacation_accrual_rate_part.$quota_percent_part.$email_part.$modified_part.$status_part, ',');
 
     $sql = "update tt_users set $parts".
       " where id = $user_id and group_id = $group_id and org_id = $org_id";
