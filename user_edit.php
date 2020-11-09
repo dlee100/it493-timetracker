@@ -105,7 +105,9 @@ if ($request->isPost()) {
         $err->add($i18n->get('error.field'), 'rate_'.$p);
     }
   }
-} else {
+} 
+else 
+{
   $cl_name = $user_details['name'];
   $cl_login = $user_details['login'];
   $cl_email = $user_details['email'];
@@ -123,6 +125,7 @@ if ($request->isPost()) {
     }
   }
   $cl_rate = str_replace('.', $user->getDecimalMark(), $user_details['rate']);
+  $cl_vacation_accrual_rate = str_replace('.', $user->getDecimalMark(), $user_details['vacation_accrual_rate']);
   $cl_role_id = $user_details['role_id'];
   $cl_client_id = $user_details['client_id'];
   $cl_status = $user_details['status'];
