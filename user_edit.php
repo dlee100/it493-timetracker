@@ -92,6 +92,8 @@ if ($request->isPost()) {
     }
   }
   $cl_rate = $request->getParameter('rate');
+  $cl_vacation_accrual_rate = $request->getParameter('vacation_accrual_rate');
+  $cl_sicktime_accrual_rate = $request->getParameter('sicktime_accrual_rate');
   $cl_projects = $request->getParameter('projects');
   if (is_array($cl_projects)) {
     foreach ($cl_projects as $p) {
@@ -104,7 +106,9 @@ if ($request->isPost()) {
         $err->add($i18n->get('error.field'), 'rate_'.$p);
     }
   }
-} else {
+} 
+else 
+{
   $cl_name = $user_details['name'];
   $cl_login = $user_details['login'];
   $cl_email = $user_details['email'];
@@ -122,6 +126,8 @@ if ($request->isPost()) {
     }
   }
   $cl_rate = str_replace('.', $user->getDecimalMark(), $user_details['rate']);
+  $cl_vacation_accrual_rate = str_replace('.', $user->getDecimalMark(), $user_details['vacation_accrual_rate']);
+  $cl_sicktime_accrual_rate = str_replace('.', $user->getDecimalMark(), $user_details['sicktime_accrual_rate']);
   $cl_role_id = $user_details['role_id'];
   $cl_client_id = $user_details['client_id'];
   $cl_status = $user_details['status'];
@@ -176,6 +182,8 @@ if ($show_quota)
   $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'quota_percent','format'=>'.2','value'=>$cl_quota_percent));
 
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'vacation_accrual_rate','format'=>'.2','value'=>$cl_vacation_accrual_rate));
+
+$form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'sicktime_accrual_rate','format'=>'.2','value'=>$cl_sicktime_accrual_rate));
 
 // Define classes for the projects table.
 class NameCellRenderer extends DefaultCellRenderer {
@@ -237,6 +245,8 @@ if ($request->isPost()) {
     }
   }
   if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
+  if (!ttValidFloat($cl_vacation_accrual_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.vacation_accrual_rate'));
+  if (!ttValidFloat($cl_sicktime_accrual_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.sicktime_accrual_rate'));
 
   if ($err->no()) {
     $existing_user = ttUserHelper::getUserByLogin($cl_login);
@@ -249,6 +259,8 @@ if ($request->isPost()) {
         'email' => $cl_email,
         'status' => $cl_status,
         'rate' => $cl_rate,
+        'vacation_accrual_rate' => $cl_vacation_accrual_rate,
+        'sicktime_accrual_rate' => $cl_sicktime_accrual_rate,
         'quota_percent' => $cl_quota_percent,
         'projects' => $assigned_projects);
       if (in_array('manage_users', $user->rights) && $cl_role_id) {

@@ -82,6 +82,8 @@ if ($request->isPost()) {
     }
   }
   $cl_rate = $request->getParameter('rate');
+  $cl_vacation_accrual_rate = $request->getParameter('vacation_accrual_rate');
+  $cl_sicktime_accrual_rate = $request->getParameter('sicktime_accrual_rate');
   $cl_projects = $request->getParameter('projects');
   if (is_array($cl_projects)) {
     foreach ($cl_projects as $p) {
@@ -138,6 +140,8 @@ if ($show_quota)
   $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'quota_percent','format'=>'.2','value'=>$cl_quota_percent));
 
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'vacation_accrual_rate', 'format'=>'.2', 'value'=>$cl_vacation_accrual_rate));  
+
+$form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'sicktime_accrual_rate', 'format'=>'.2', 'value'=>$cl_sicktime_accrual_rate));
 
 $show_projects = MODE_PROJECTS == $user->getTrackingMode() || MODE_PROJECTS_AND_TASKS == $user->getTrackingMode();
 if ($show_projects) {
@@ -203,6 +207,8 @@ if ($request->isPost()) {
     }
   }
   if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
+  if (!ttValidFloat($cl_vacation_accrual_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.vacation_accrual_rate'));
+  if (!ttValidFloat($cl_sicktime_accrual_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.sicktime_accrual_rate'));
   if (!ttUserHelper::canAdd()) $err->add($i18n->get('error.user_count'));
 
   // ##### LOOK AT THIS -Daniel #####
@@ -221,6 +227,7 @@ if ($request->isPost()) {
         'projects' => $assigned_projects,
         'email' => $cl_email,
         'vacation_accrual_rate' => $cl_vacation_accrual_rate);
+        'sicktime_accrual_rate' => $cl_sicktime_accrual_rate);
       $user_id = ttUserHelper::insert($fields);
 
       // Insert user custom fields if we have them.

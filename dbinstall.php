@@ -417,6 +417,8 @@ if ($_POST) {
     ttExecute("ALTER TABLE tt_users CHANGE u_name name varchar(100) default NULL");
     ttExecute("ALTER TABLE tt_users CHANGE u_email email varchar(100) default NULL");
     ttExecute("ALTER TABLE tt_users CHANGE u_rate rate float(6,2) NOT NULL default '0.00'");
+    ttExecute("ALTER TABLE tt_users CHANGE u_vacation_accrual_rate vacation_accrual_rate float(6,2) NOT NULL default '0.00'");
+    ttExecute("ALTER TABLE tt_users CHANGE u_sicktime_accrual_rate sicktime_accrual_rate float(6,2) NOT NULL default '0.00'");
     ttExecute("update tt_users set u_active = NULL where u_active = 1000");
     ttExecute("ALTER TABLE tt_users CHANGE u_active status tinyint(4) default '1'");
     ttExecute("ALTER TABLE tt_teams ADD COLUMN status tinyint(4) default '1'");
@@ -583,7 +585,8 @@ if ($_POST) {
     ttExecute("ALTER TABLE tt_project_task_binds CHANGE ab_id_p project_id int(11) NOT NULL");
     ttExecute("ALTER TABLE tt_project_task_binds CHANGE ab_id_a task_id int(11) NOT NULL");
     ttExecute("RENAME TABLE user_bind TO tt_user_project_binds");
-    ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_rate rate float(6,2) NOT NULL default '0.00'");
+    ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_vacation_accrual_rate vacation_accrual_rate float(6,2) NOT NULL default '0.00'");
+    ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_sicktime_accrual_rate sicktime_accrual_rate float(6,2) NOT NULL default '0.00'");
     ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_id_p project_id int(11) NOT NULL");
     ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_id_u user_id int(11) NOT NULL");
     ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_id id int(11) NOT NULL auto_increment");
@@ -1077,7 +1080,10 @@ if ($_POST) {
     ttExecute("ALTER TABLE `tt_groups` ADD COLUMN `description` varchar(255) default NULL after `name`");
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.26', modified = now() where param_name = 'version_db' and param_value = '1.18.24'");
     ttExecute("update `tt_client_project_binds` cpb inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.26') inner join `tt_clients` c on c.id = cpb.client_id set cpb.group_id = c.group_id, cpb.org_id = c.org_id where cpb.org_id is null");
-    ttExecute("ALTER TABLE `tt_users` ADD COLUMN `quota_percent` float(6,2) default NULL after `rate`");
+    ttExecute("ALTER TABLE `tt_users` ADD COLUMN `vacation_accrual_rate` float(6,2) default NULL after `rate`");
+    ttExecute("ALTER TABLE `tt_users` ADD COLUMN `quota_percent` float(6,2) default NULL after `vacation_accrual_rate`");
+    ttExecute("ALTER TABLE `tt_users` ADD COLUMN `sicktime_accrual_rate` float(6,2) default NULL after `rate`");
+    ttExecute("ALTER TABLE `tt_users` ADD COLUMN `quota_percent` float(6,2) default NULL after `sicktime_accrual_rate`");
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.34', modified = now() where param_name = 'version_db' and param_value = '1.18.26'");
     ttExecute("update `tt_users` u inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.34') set u.quota_percent = 100.00 where u.quota_percent is null");
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.36', modified = now() where param_name = 'version_db' and param_value = '1.18.34'");
