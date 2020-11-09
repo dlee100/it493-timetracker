@@ -241,6 +241,7 @@ if ($request->isPost()) {
     }
   }
   if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
+  if (!ttValidFloat($cl_vacation_accrual_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.vacation_accrual_rate'));
 
   if ($err->no()) {
     $existing_user = ttUserHelper::getUserByLogin($cl_login);
