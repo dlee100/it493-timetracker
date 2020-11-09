@@ -82,6 +82,7 @@ if ($request->isPost()) {
     }
   }
   $cl_rate = $request->getParameter('rate');
+  $cl_vacation_accrual_rate = $request->getParameter('vacation_accrual_rate');
   $cl_projects = $request->getParameter('projects');
   if (is_array($cl_projects)) {
     foreach ($cl_projects as $p) {
@@ -203,6 +204,7 @@ if ($request->isPost()) {
     }
   }
   if (!ttValidFloat($cl_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.default_rate'));
+  if (!ttValidFloat($cl_vacation_accrual_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.vacation_accrual_rate'));
   if (!ttUserHelper::canAdd()) $err->add($i18n->get('error.user_count'));
 
   // ##### LOOK AT THIS -Daniel #####
