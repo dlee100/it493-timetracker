@@ -94,6 +94,7 @@ CREATE TABLE `tt_users` (
   `client_id` int(11) default NULL,                # client id for "client" user role
   `rate` float(6,2) NOT NULL default '0.00',       # default hourly rate
   `vacation_accrual_rate` float(6,2) NOT NULL default '0.00',       # default vacation accrual rate
+  `sicktime_accrual_rate` float(6,2) NOT NULL default '0.00',       # default sicktime accrual rate
   `quota_percent` float(6,2) NOT NULL default '100.00', # percent of time quota
   `pto_accrual` float(6,2) NOT NULL default '0.00' # default PTO accrual rate
   `sick_accrual` float(6,2) NOT NULL default '0.00' # default sick leave accrual
