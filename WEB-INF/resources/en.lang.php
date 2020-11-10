@@ -526,6 +526,7 @@ $i18n_key_words = array(
 'form.users.rate' => 'Rate',
 'form.users.default_rate' => 'Default hourly rate',
 'form.users.vacation_accrual_rate' => 'Vacation accrual rate',
+'form.users.sicktime_accrual_rate' => 'Sicktime accrual rate',
 
 // Editing User form. See example at https://timetracker.anuko.com/user_edit.php
 'form.user_edit.swap_roles' => 'Swap roles',
