@@ -114,6 +114,14 @@ function handleClientControl() {
       <td>{$forms.userForm.rate.control}</td>
     </tr>
     <tr>
+      <td align="right">{$i18n.form.users.vacation_balance}&nbsp;(User Total):</td>
+      <td>{$forms.userForm.vacation_balance.control}</td>
+    </tr>
+    <tr>
+      <td align="right">{$i18n.form.users.sicktime_balance}&nbsp;(User Total):</td>
+      <td>{$forms.userForm.sicktime_balance.control}</td>
+    </tr>
+    <tr>
       <td align="right">{$i18n.form.users.vacation_accrual_rate}&nbsp;(Hours Per Month):</td>
       <td>{$forms.userForm.vacation_accrual_rate.control}</td>
     </tr>
