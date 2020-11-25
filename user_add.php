@@ -139,6 +139,10 @@ $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','for
 if ($show_quota)
   $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'quota_percent','format'=>'.2','value'=>$cl_quota_percent));
 
+$form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'vacation_balance', 'format'=>'.2', 'value'=>$cl_vacation_balance));
+
+$form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'sicktime_balance', 'format'=>'.2', 'value'=>$cl_sicktime_balance));
+
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'vacation_accrual_rate', 'format'=>'.2', 'value'=>$cl_vacation_accrual_rate));  
 
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'sicktime_accrual_rate', 'format'=>'.2', 'value'=>$cl_sicktime_accrual_rate));
@@ -226,7 +230,9 @@ if ($request->isPost()) {
         'client_id' => $cl_client_id,
         'projects' => $assigned_projects,
         'email' => $cl_email,
-        'vacation_accrual_rate' => $cl_vacation_accrual_rate);
+        'vacation_balance' => $cl_vacation_balance,
+        'sicktime_balance' => $cl_sicktime_balance,
+        'vacation_accrual_rate' => $cl_vacation_accrual_rate,
         'sicktime_accrual_rate' => $cl_sicktime_accrual_rate);
       $user_id = ttUserHelper::insert($fields);
 
