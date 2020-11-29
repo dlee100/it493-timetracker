@@ -218,7 +218,7 @@
   </tr>
     <tr>
     <td align="left">{$i18n.form.users.vacation_balance}: {$vacation_balance}</td>
-    <td align="right">{$i18n.form.time.vacation_accrual_rate}: <span style="color: red;">{$vacation_accrual_rate}</span></td>
+    <td align="right">{$i18n.form.users.vacation_accrual_rate}: <span style="color: red;">{$vacation_accrual_rate}</span></td>
     {/if}
   </tr>
   {/if}
