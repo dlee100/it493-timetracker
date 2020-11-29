@@ -154,11 +154,13 @@ input[type=checkbox], label {
 .tableHeader {
   font-weight: bold;
   text-align: left;
+  background-color: #a6ccf7;
 }
 
 .tableHeaderCentered {
   font-weight: bold;
   text-align: center;
+  background-color: #326491;
 }
 
 .rowReportItem {

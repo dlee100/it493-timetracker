@@ -129,8 +129,8 @@ if ($user->isPluginEnabled('mq')){
   // -- $sicktime_accrual_rate
 
   if ($request->isPost()){
-    $vacation_accrual_rate = $request->getParameter('vacation_accrual_rate', @$_SERVER['vacation_accrual_rate']);
-    $sicktime_accrual_rate = $request->getParameter('sicktime_accrual_rate', @$_SERVER['sicktime_accrual_rate']);
+    $vacation_accrual_rate = $request->getParameter('vacation_accrual_rate', @$_GET['vacation_accrual_rate']);
+    $sicktime_accrual_rate = $request->getParameter('sicktime_accrual_rate', @$_GET['sicktime_accrual_rate']);
   }
 
   // Daniel & Sonu: insert balance function

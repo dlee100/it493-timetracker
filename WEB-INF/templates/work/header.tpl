@@ -28,9 +28,9 @@
       <table cellspacing="0" cellpadding="0" width="100%" border="0">
         <tr>
 {if $user->custom_logo}
-          <td align="center">
+          <td align="center" bgcolor="#326491">
 {else}
-          <td bgcolor="#a6ccf7" background="../img/top_bg.gif" align="center">
+          <td bgcolor="#326491" background="../img/top_bg.gif" align="center">
 {/if}
             <table cellspacing="0" cellpadding="0" width="{$tab_width}" border="0">
               <tr>
