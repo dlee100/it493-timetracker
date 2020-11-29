@@ -64,6 +64,7 @@ if ($request->isPost() && $userChanged) {
   $user->setOnBehalfUser($user_id);
 } else {
   $user_id = $user->getUser();
+  $user_details = $user->getUserDetails($user_id);
 }
 
 $group_id = $user->getGroup();
@@ -123,27 +124,11 @@ if ($user->isPluginEnabled('mq')){
   $month_total_minutes = ttTimeHelper::toMinutes($month_total);
   $balance_left = $quota_minutes_from_1st - $month_total_minutes;
   $minutes_left = $month_quota_minutes - $month_total_minutes;
-  
-  // added variables
-  // -- $vacation_accrual_rate
-  // -- $sicktime_accrual_rate
 
-  if ($request->isPost()){
-    $vacation_accrual_rate = $request->getParameter('vacation_accrual_rate', @$_GET['vacation_accrual_rate']);
-    $sicktime_accrual_rate = $request->getParameter('sicktime_accrual_rate', @$_GET['sicktime_accrual_rate']);
-  }
-
-  // Daniel & Sonu: insert balance function
-  //$lastDayThisMonth = 
-  if ($balance_left == 0){
-    // user has vacation/sicktime accrued
-    $vacation_balance = $vacation_balance + $vacation_accrual_rate;
-    $sicktime_balance = $sicktime_balance + $sicktime_accrual_rate;
-  } else{
-    // user's vacation balance - balance left
-    $vacation_balance = $vacation_balance - $balance_left;
-  }
-
+  $cl_vacation_balance = $user_details['vacation_balance'];
+  $cl_sicktime_balance = $user_details['sicktime_balance'];
+  $cl_vacation_accrual_rate = $user_details['vacation_accrual_rate'];
+  $cl_sicktime_accrual_rate = $user_details['sicktime_accrual_rate'];
 
   $smarty->assign('month_total', $month_total);
   $smarty->assign('month_quota', ttTimeHelper::toAbsDuration($month_quota_minutes));
@@ -151,6 +136,35 @@ if ($user->isPluginEnabled('mq')){
   $smarty->assign('balance_remaining', ttTimeHelper::toAbsDuration($balance_left));
   $smarty->assign('over_quota', $minutes_left < 0);
   $smarty->assign('quota_remaining', ttTimeHelper::toAbsDuration($minutes_left));
+
+  $smarty->assign('vacation_balance', $cl_vacation_balance);
+  $smarty->assign('sicktime_balance', $cl_sicktime_balance);
+  $smarty->assign('vacation_accrual_rate', $cl_vacation_accrual_rate);
+  $smarty->assign('sicktime_accrual_rate', $cl_sicktime_accrual_rate);
+
+  // *** use date function ***
+  date_default_timezone_set('America/New_York');
+
+  //$d = new DateTime(date("t"));
+  //echo $d->format('t');
+  // variables to fetch last day condition
+  //$currentDay = date("j");
+  //$lastDayOfMonth = $date->modify(sprintf("+%d days", $date->format("t") - $date->format("j")));
+  // function to calculate balances
+  if ($minutes_left <= 0) // && $cl_date == $lastDayOfMonth
+  {
+    $cl_vacation_balance = $cl_vacation_balance + $cl_vacation_accrual_rate;
+    $cl_sicktime_balance = $cl_sicktime_balance + $cl_sicktime_accrual_rate;
+    $fields = array(
+      'vacation_balance' => $cl_vacation_balance,
+      'sicktime_balance' => $cl_sicktime_balance);
+    $result = ttUserHelper::update($user_id, $fields);
+  }
+  else
+  {
+    $cl_vacation_balance = $cl_vacation_balance;
+    $cl_sicktime_balance = $cl_sicktime_balance;
+  }
 }
 
 // Initialize variables.
