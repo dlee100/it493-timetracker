@@ -215,7 +215,11 @@
     {else}
     <td align="right">{$i18n.form.time.remaining_quota}: <span style="color: red;">{$quota_remaining}</span></td>
     {/if}
-  </tr>  
+  </tr>
+  <tr>
+    <td align="left">{$i18n.form.users.vacation_balance}: {$vacation_balance}</td>
+    <td align="right">{$i18n.form.users.vacation_accrual_rate}: {$vacation_accrual_rate}</td>
+  </tr>
 </table>
 
 {$forms.timeRecordForm.close}
