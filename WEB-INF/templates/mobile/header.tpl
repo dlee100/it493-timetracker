@@ -35,7 +35,7 @@
 {if $user->custom_logo}
           <td align="center">
 {else}
-          <td bgcolor="#a6ccf7" background="../img/top_bg.gif" align="center">
+          <td bgcolor="#326491" background="../img/top_bg.gif" align="center">
 {/if}
             <table cellspacing="0" cellpadding="0" width="{$tab_width}" border="0">
               <tr>

@@ -29,25 +29,29 @@
     <td valign="top" align="center"> <!-- This is to centrally align all our content. -->
 
       <!-- top image -->
-      <table cellspacing="0" cellpadding="0" width="100%" border="0">
+      <table bgcolor="#326491" cellspacing="0" cellpadding="0" width="100%" border="0">
         <tr>
 {if $user->custom_logo}
           <td align="center" bgcolor="#326491">
 {else}
           <td bgcolor="#326491" background="img/top_bg.gif" align="center">
 {/if}
-            <table cellspacing="0" cellpadding="0" width="{$tab_width}" border="0">
+            <table bgcolor="#326491" cellspacing="0" cellpadding="0" width="{$tab_width}" border="0">
               <tr>
                 <td valign="top">
-                  <table id="page_logo" cellspacing="0" cellpadding="0" width="100%" border="0">
+                  <table bgcolor="#326491" id="page_logo" cellspacing="0" cellpadding="0" width="100%" border="0">
                     <tr><td height="6" colspan="2"><img width="1" height="6" src="img/1x1.gif" border="0"></td></tr>
+                    <td align="center"><h2 style="background-color:white;color:#326491">Time Tracker</h2></td>
                     <tr valign="top">
 {if $user->custom_logo}
                       <td height="55" align="center"><img alt="Time Tracker" width="300" height="43" src="{$custom_logo}" border="0"></td>
 {else}
-                      <td height="55" align="center"><a href="https://www.avenity.com/" target="_blank"><img alt="Anuko Time Tracker" width="300" height="43" src="img/logo.png" border="0"></a></td>
+                      <td height="55" align="center"><a href="https://www.avenity.com/" target="_blank"><img alt="Avenity Logo" width="300" height="43" src="img/logo.png" border="0"></a></td>
+                      
 {/if}
                     </tr>
+                    <td align="center"><p style="font-size:10px;">Based on Anuko Time Tracker</p></td>
+                    
                   </table>
                 </td>
               </tr>
