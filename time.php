@@ -123,6 +123,11 @@ if ($user->isPluginEnabled('mq')){
   $month_total_minutes = ttTimeHelper::toMinutes($month_total);
   $balance_left = $quota_minutes_from_1st - $month_total_minutes;
   $minutes_left = $month_quota_minutes - $month_total_minutes;
+
+  $cl_vacation_balance = $request->getParameter('vacation_balance');
+  $cl_sicktime_balance = $request->getParameter('sicktime_balance');
+  $cl_vacation_accrual_rate = $request->getParameter('vacation_accrual_rate');
+  $cl_sicktime_accrual_rate = $request->getParameter('sicktime_accrual_rate');
   
   $smarty->assign('month_total', $month_total);
   $smarty->assign('month_quota', ttTimeHelper::toAbsDuration($month_quota_minutes));
@@ -130,6 +135,17 @@ if ($user->isPluginEnabled('mq')){
   $smarty->assign('balance_remaining', ttTimeHelper::toAbsDuration($balance_left));
   $smarty->assign('over_quota', $minutes_left < 0);
   $smarty->assign('quota_remaining', ttTimeHelper::toAbsDuration($minutes_left));
+
+  $smarty->assign('vacation_balance', $cl_vacation_balance);
+  $smarty->assign('sicktime_balance', $cl_sicktime_balance);
+  $smarty->assign('vacation_accrual_rate', $cl_vacation_accrual_rate);
+  $smarty->assign('sicktime_accrual_rate', $cl_sicktime_accrual_rate);
+
+  if ($balance_left == 0)
+  {
+    $cl_vacation_balance = $cl_vacation_balance + $cl_vacation_accrual_rate;
+    $cl_sicktime_balance = $cl_sicktime_balance + $cl_vacation_accrual_rate;
+  }
 }
 
 // Initialize variables.
