@@ -135,6 +135,11 @@ if ($user->isPluginEnabled('mq')){
   $smarty->assign('balance_remaining', ttTimeHelper::toAbsDuration($balance_left));
   $smarty->assign('over_quota', $minutes_left < 0);
   $smarty->assign('quota_remaining', ttTimeHelper::toAbsDuration($minutes_left));
+
+  $smarty->assign('vacation_balance', $cl_vacation_balance);
+  $smarty->assign('sicktime_balance', $cl_sicktime_balance);
+  $smarty->assign('vacation_accrual_rate', $cl_vacation_accrual_rate);
+  $smarty->assign('sicktime_accrual_rate', $cl_sicktime_accrual_rate);
 }
 
 // Initialize variables.
