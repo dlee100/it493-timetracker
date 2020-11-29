@@ -82,7 +82,7 @@ $showFiles = $user->isPluginEnabled('at');
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
-$selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date);
+$selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date); //
 if($selected_date->isError())
   $selected_date = new DateAndTime(DB_DATEFORMAT);
 if(!$cl_date)
@@ -117,13 +117,34 @@ if ($showNoteRow) {
 if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
-  $month_quota_minutes = $quota->getUserQuota($selected_date->mYear, $selected_date->mMonth);
+  $month_quota_minutes = $quota->getUserQuota($selected_date->mYear, $selected_date->mMonth); //
   $quota_minutes_from_1st = $quota->getUserQuotaFrom1st($selected_date);
   $month_total = ttTimeHelper::getTimeForMonth($selected_date);
   $month_total_minutes = ttTimeHelper::toMinutes($month_total);
   $balance_left = $quota_minutes_from_1st - $month_total_minutes;
   $minutes_left = $month_quota_minutes - $month_total_minutes;
   
+  // added variables
+  // -- $vacation_accrual_rate
+  // -- $sicktime_accrual_rate
+
+  if ($request->isPost()){
+    $vacation_accrual_rate = $request->getParameter('vacation_accrual_rate', @$_SERVER['vacation_accrual_rate']);
+    $sicktime_accrual_rate = $request->getParameter('sicktime_accrual_rate', @$_SERVER['sicktime_accrual_rate']);
+  }
+
+  // Daniel & Sonu: insert balance function
+  //$lastDayThisMonth = 
+  if ($balance_left == 0){
+    // user has vacation/sicktime accrued
+    $vacation_balance = $vacation_balance + $vacation_accrual_rate;
+    $sicktime_balance = $sicktime_balance + $sicktime_accrual_rate;
+  } else{
+    // user's vacation balance - balance left
+    $vacation_balance = $vacation_balance - $balance_left;
+  }
+
+
   $smarty->assign('month_total', $month_total);
   $smarty->assign('month_quota', ttTimeHelper::toAbsDuration($month_quota_minutes));
   $smarty->assign('over_balance', $balance_left < 0);
