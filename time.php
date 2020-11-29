@@ -124,10 +124,12 @@ if ($user->isPluginEnabled('mq')){
   $balance_left = $quota_minutes_from_1st - $month_total_minutes;
   $minutes_left = $month_quota_minutes - $month_total_minutes;
 
-  $cl_vacation_balance = $request->getParameter('vacation_balance');
+  //$cl_vacation_balance = $request->getParameter('vacation_balance');
   $cl_sicktime_balance = $request->getParameter('sicktime_balance');
   $cl_vacation_accrual_rate = $request->getParameter('vacation_accrual_rate');
   $cl_sicktime_accrual_rate = $request->getParameter('sicktime_accrual_rate');
+
+  $cl_vacation_balance = $user_details['vacation_balance'];
   
   $smarty->assign('month_total', $month_total);
   $smarty->assign('month_quota', ttTimeHelper::toAbsDuration($month_quota_minutes));
