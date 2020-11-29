@@ -114,6 +114,8 @@ if ($showNoteRow) {
   $smarty->assign('colspan', $colspan);
 }
 
+$cl_vacation_balance = $request->getParameter('vacation_balance');
+
 if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
@@ -127,7 +129,7 @@ if ($user->isPluginEnabled('mq')){
   $user_id = (int)$request->getParameter('id');
   $user_details = $user->getUserDetails($user_id);
 
-  $cl_vacation_balance = str_replace('.', $user->getDecimalMark(), $user_details['vacation_balance']);
+  //$cl_vacation_balance = str_replace('.', $user->getDecimalMark(), $user_details['vacation_balance']);
   //$cl_vacation_balance = $user_details['vacation_balance'];
   //$cl_vacation_balance = $request->getParameter('vacation_balance');
   $cl_sicktime_balance = $request->getParameter('sicktime_balance');
