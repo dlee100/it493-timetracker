@@ -126,7 +126,7 @@ if ($user->isPluginEnabled('mq')){
   $minutes_left = $month_quota_minutes - $month_total_minutes;
 
   //$cl_vacation_balance = str_replace('.', $user->getDecimalMark(), $user_details['vacation_balance']);
-  //$cl_vacation_balance = $user_details['vacation_balance'];
+  $cl_vacation_balance = $user_details['vacation_balance'];
   //$cl_vacation_balance = $request->getParameter('vacation_balance');
   $cl_sicktime_balance = $request->getParameter('sicktime_balance');
   $cl_vacation_accrual_rate = $request->getParameter('vacation_accrual_rate');
