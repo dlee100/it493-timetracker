@@ -221,7 +221,7 @@
     <td align="right">{$i18n.form.users.vacation_accrual_rate}: {$vacation_accrual_rate}</td>
   </tr>
   <tr>
-    <td align="left">{$i18n.form.users.vacation_accrual_rate}: {$vacation_accrual_rate}</td>
+    <td align="left">{$i18n.form.users.sicktime_balance}: {$sicktime_balance}</td>
     <td align="right">{$i18n.form.users.sicktime_accrual_rate}: {$sicktime_accrual_rate}</td>
   </tr>
   {/if}
