@@ -141,6 +141,21 @@ if ($user->isPluginEnabled('mq')){
   $smarty->assign('sicktime_balance', $cl_sicktime_balance);
   $smarty->assign('vacation_accrual_rate', $cl_vacation_accrual_rate);
   $smarty->assign('sicktime_accrual_rate', $cl_sicktime_accrual_rate);
+
+  if ($balance_left == 0)
+  {
+    $cl_vacation_balance = $cl_vacation_balance + $cl_vacation_accrual_rate;
+    $cl_sicktime_balance = $cl_sicktime_balance + $cl_vacation_accrual_rate;
+    $fields = array(
+      'vacation_balance' => $cl_vacation_balance,
+      'sicktime_balance' => $cl_sicktime_balance);
+    $result = ttUserHelper::update($user_id, $fields);
+  }
+  else
+  {
+    $cl_vacation_balance = $cl_vacation_balance;
+    $cl_sicktime_balance = $cl_sicktime_balance;
+  }
 }
 
 // Initialize variables.
