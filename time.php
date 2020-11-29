@@ -64,6 +64,7 @@ if ($request->isPost() && $userChanged) {
   $user->setOnBehalfUser($user_id);
 } else {
   $user_id = $user->getUser();
+  $user_details = $user->getUserDetails($user_id);
 }
 
 $group_id = $user->getGroup();
@@ -88,8 +89,6 @@ if($selected_date->isError())
 if(!$cl_date)
   $cl_date = $selected_date->toString(DB_DATEFORMAT);
 $_SESSION['date'] = $cl_date;
-
-$cl_vacation_balance = $request->getParameter('vacation_balance');
 
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
