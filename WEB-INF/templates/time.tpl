@@ -216,6 +216,14 @@
     <td align="right">{$i18n.form.time.remaining_quota}: <span style="color: red;">{$quota_remaining}</span></td>
     {/if}
   </tr>
+  <tr>
+    <td align="left">{$i18n.form.users.vacation_balance}: {$vacation_balance}</td>
+    <td align="right">{$i18n.form.users.vacation_accrual_rate}: {$vacation_accrual_rate}</td>
+  </tr>
+  <tr>
+    <td align="left">{$i18n.form.users.sicktime_balance}: {$sicktime_balance}</td>
+    <td align="right">{$i18n.form.users.sicktime_accrual_rate}: {$sicktime_accrual_rate}</td>
+  </tr>
   {/if}
 </table>
 

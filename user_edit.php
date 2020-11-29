@@ -92,6 +92,8 @@ if ($request->isPost()) {
     }
   }
   $cl_rate = $request->getParameter('rate');
+  $cl_vacation_balance = $request->getParameter('vacation_balance');
+  $cl_sicktime_balance = $request->getParameter('sicktime_balance');
   $cl_vacation_accrual_rate = $request->getParameter('vacation_accrual_rate');
   $cl_sicktime_accrual_rate = $request->getParameter('sicktime_accrual_rate');
   $cl_projects = $request->getParameter('projects');
@@ -126,6 +128,8 @@ else
     }
   }
   $cl_rate = str_replace('.', $user->getDecimalMark(), $user_details['rate']);
+  $cl_vacation_balance = str_replace('.', $user->getDecimalMark(), $user_details['vacation_balance']);
+  $cl_sicktime_balance = str_replace('.', $user->getDecimalMark(), $user_details['sicktime_balance']);
   $cl_vacation_accrual_rate = str_replace('.', $user->getDecimalMark(), $user_details['vacation_accrual_rate']);
   $cl_sicktime_accrual_rate = str_replace('.', $user->getDecimalMark(), $user_details['sicktime_accrual_rate']);
   $cl_role_id = $user_details['role_id'];
@@ -180,6 +184,10 @@ $form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','format'=>'.2','value'=>$cl_rate));
 if ($show_quota)
   $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'quota_percent','format'=>'.2','value'=>$cl_quota_percent));
+
+$form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'vacation_balance','format'=>'.2','value'=>$cl_vacation_balance));
+
+$form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'sicktime_balance','format'=>'.2','value'=>$cl_sicktime_balance));
 
 $form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'vacation_accrual_rate','format'=>'.2','value'=>$cl_vacation_accrual_rate));
 
@@ -248,6 +256,9 @@ if ($request->isPost()) {
   if (!ttValidFloat($cl_vacation_accrual_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.vacation_accrual_rate'));
   if (!ttValidFloat($cl_sicktime_accrual_rate, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.sicktime_accrual_rate'));
 
+  if (!ttValidFloat($cl_vacation_balance, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.vacation_balance'));
+  if (!ttValidFloat($cl_sicktime_balance, true)) $err->add($i18n->get('error.field'), $i18n->get('form.users.sicktime_balance'));
+
   if ($err->no()) {
     $existing_user = ttUserHelper::getUserByLogin($cl_login);
     if (!$existing_user || ($user_id == $existing_user['id'])) {
@@ -259,6 +270,8 @@ if ($request->isPost()) {
         'email' => $cl_email,
         'status' => $cl_status,
         'rate' => $cl_rate,
+        'vacation_balance' => $cl_vacation_balance,
+        'sicktime_balance' => $cl_sicktime_balance,
         'vacation_accrual_rate' => $cl_vacation_accrual_rate,
         'sicktime_accrual_rate' => $cl_sicktime_accrual_rate,
         'quota_percent' => $cl_quota_percent,
