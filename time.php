@@ -89,6 +89,8 @@ if(!$cl_date)
   $cl_date = $selected_date->toString(DB_DATEFORMAT);
 $_SESSION['date'] = $cl_date;
 
+$cl_vacation_balance = $request->getParameter('vacation_balance');
+
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
   require_once('plugins/CustomFields.class.php');
@@ -114,8 +116,6 @@ if ($showNoteRow) {
   $smarty->assign('colspan', $colspan);
 }
 
-$cl_vacation_balance = $request->getParameter('vacation_balance');
-
 if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
@@ -125,9 +125,6 @@ if ($user->isPluginEnabled('mq')){
   $month_total_minutes = ttTimeHelper::toMinutes($month_total);
   $balance_left = $quota_minutes_from_1st - $month_total_minutes;
   $minutes_left = $month_quota_minutes - $month_total_minutes;
-
-  $user_id = (int)$request->getParameter('id');
-  $user_details = $user->getUserDetails($user_id);
 
   //$cl_vacation_balance = str_replace('.', $user->getDecimalMark(), $user_details['vacation_balance']);
   //$cl_vacation_balance = $user_details['vacation_balance'];
