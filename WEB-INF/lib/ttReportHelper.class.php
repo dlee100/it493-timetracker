@@ -1021,8 +1021,8 @@ class ttReportHelper {
 
     // Define some styles to use in email.
     $style_title = 'text-align: center; font-size: 15pt; font-family: Arial, Helvetica, sans-serif;';
-    $tableHeader = 'font-weight: bold; background-color: #a6ccf7; text-align: left;';
-    $tableHeaderCentered = 'font-weight: bold; background-color: #a6ccf7; text-align: center;';
+    $tableHeader = 'font-weight: bold; background-color: #326491; text-align: left;';
+    $tableHeaderCentered = 'font-weight: bold; background-color: #326491; text-align: center;';
     $rowItem = 'background-color: #ffffff;';
     $rowItemAlt = 'background-color: #f5f5f5;';
     $rowSubtotal = 'background-color: #e0e0e0;';
