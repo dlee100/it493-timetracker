@@ -97,6 +97,7 @@ CREATE TABLE `tt_users` (
   `sicktime_balance` float(6,2) NOT NULL default '0.00',       # sicktime balance
   `vacation_accrual_rate` float(6,2) NOT NULL default '0.00',       # default vacation accrual rate
   `sicktime_accrual_rate` float(6,2) NOT NULL default '0.00',       # default sicktime accrual rate
+  `accrued_within_month` tinyint(1) NOT NULL default '0', # TRUE/FALSE value for correct accrual calculation
   `quota_percent` float(6,2) NOT NULL default '100.00', # percent of time quota
   `pto_accrual` float(6,2) NOT NULL default '0.00' # default PTO accrual rate
   `sick_accrual` float(6,2) NOT NULL default '0.00' # default sick leave accrual

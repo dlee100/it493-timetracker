@@ -88,7 +88,7 @@ if ($items && $grouping) {
 $filename = strtolower($i18n->get('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];
 
 // Start preparing HTML to build PDF from.
-$styleHeader = 'style="background-color:#a6ccf7;"';
+$styleHeader = 'style="background-color:#326491;"';
 $styleSubtotal = 'style="background-color:#e0e0e0;"';
 $styleCentered = 'style="text-align:center;"';
 $styleRightAligned = 'style="text-align:right;"';

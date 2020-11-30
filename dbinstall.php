@@ -421,6 +421,7 @@ if ($_POST) {
     ttExecute("ALTER TABLE tt_users CHANGE u_sicktime_balance sicktime_balance float(6,2) NOT NULL default '0.00'");
     ttExecute("ALTER TABLE tt_users CHANGE u_vacation_accrual_rate vacation_accrual_rate float(6,2) NOT NULL default '0.00'");
     ttExecute("ALTER TABLE tt_users CHANGE u_sicktime_accrual_rate sicktime_accrual_rate float(6,2) NOT NULL default '0.00'");
+    ttExecute("ALTER TABLE tt_users CHANGE u_accrued_within_month accrued_within_month tinyint(1) NOT NULL default '0'");
     ttExecute("update tt_users set u_active = NULL where u_active = 1000");
     ttExecute("ALTER TABLE tt_users CHANGE u_active status tinyint(4) default '1'");
     ttExecute("ALTER TABLE tt_teams ADD COLUMN status tinyint(4) default '1'");
@@ -591,6 +592,7 @@ if ($_POST) {
     ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_sicktime_balance sicktime_balance float(6,2) NOT NULL default '0.00'");
     ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_vacation_accrual_rate vacation_accrual_rate float(6,2) NOT NULL default '0.00'");
     ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_sicktime_accrual_rate sicktime_accrual_rate float(6,2) NOT NULL default '0.00'");
+    ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_accrued_within_month accrued_within_month tinyint(1) NOT NULL default '0'");
     ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_id_p project_id int(11) NOT NULL");
     ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_id_u user_id int(11) NOT NULL");
     ttExecute("ALTER TABLE tt_user_project_binds CHANGE ub_id id int(11) NOT NULL auto_increment");
@@ -1092,6 +1094,7 @@ if ($_POST) {
     ttExecute("ALTER TABLE `tt_users` ADD COLUMN `quota_percent` float(6,2) default NULL after `vacation_accrual_rate`");
     ttExecute("ALTER TABLE `tt_users` ADD COLUMN `sicktime_accrual_rate` float(6,2) default NULL after `rate`");
     ttExecute("ALTER TABLE `tt_users` ADD COLUMN `quota_percent` float(6,2) default NULL after `sicktime_accrual_rate`");
+    ttExecute("ALTER TABLE `tt_users` ADD COLUMN `accrued_within_month` tinyint(1) default NULL after `quota_percent`");
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.34', modified = now() where param_name = 'version_db' and param_value = '1.18.26'");
     ttExecute("update `tt_users` u inner join `tt_site_config` sc on (sc.param_name = 'version_db' and sc.param_value = '1.18.34') set u.quota_percent = 100.00 where u.quota_percent is null");
     ttExecute("UPDATE `tt_site_config` SET param_value = '1.18.36', modified = now() where param_name = 'version_db' and param_value = '1.18.34'");

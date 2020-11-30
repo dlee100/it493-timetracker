@@ -432,8 +432,8 @@ class ttInvoiceHelper {
 
     // Define some styles to use in email.
     $style_title = 'text-align: center; font-size: 15pt; font-family: Arial, Helvetica, sans-serif;';
-    $style_tableHeader = 'font-weight: bold; background-color: #a6ccf7; text-align: left;';
-    $style_tableHeaderCentered = 'font-weight: bold; background-color: #a6ccf7; text-align: center;';
+    $style_tableHeader = 'font-weight: bold; background-color: #326491; text-align: left;';
+    $style_tableHeaderCentered = 'font-weight: bold; background-color: #326491; text-align: center;';
 
     // Determine tracking mode once for multiple reuse below.
     $trackingMode = $user->getTrackingMode();
