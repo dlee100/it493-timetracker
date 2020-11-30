@@ -152,7 +152,7 @@ if ($user->isPluginEnabled('mq'))
   // DEFAULT VALUE FOR $cl_accrued_within_month is FALSE
   // 1 = TRUE
   // 0 = FALSE
-  if ($minutes_left <= 0)
+  if ($minutes_left >= 0)
   {
     //$onceAMonth = getOnceAMonth($onceAMonth);
     if ($cl_accrued_within_month == 1) // if pto/sick times already incremented within the month, pass thru
@@ -172,7 +172,7 @@ if ($user->isPluginEnabled('mq'))
       $result = ttUserHelper::update($user_id, $fields); 
     }
   }  
-  elseif ($minutes_left > 0)
+  elseif ($minutes_left < 0)
   {
     $cl_vacation_balance = $cl_vacation_balance - $minutes_left;
   }
