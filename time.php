@@ -172,10 +172,10 @@ if ($user->isPluginEnabled('mq'))
       $result = ttUserHelper::update($user_id, $fields); 
     }
   }  
-  elseif ($minutes_left > 0)
-  {
-    $cl_vacation_balance = $cl_vacation_balance - $minutes_left;
-  }
+  //elseif ($minutes_left > 0)
+  //{
+    //$cl_vacation_balance = $cl_vacation_balance - $minutes_left;
+  //}
   else
   {
     $cl_vacation_balance = $cl_vacation_balance;
