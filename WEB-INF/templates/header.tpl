@@ -40,11 +40,11 @@
               <tr>
                 <td valign="top">
                   <table bgcolor="#326491" id="page_logo" cellspacing="0" cellpadding="0" width="100%" border="0">
-                    <tr><td height="6" colspan="2"><img width="1" height="6" src="img/1x1.gif" border="0"></td></tr>
+                    <tr><td height="3" colspan="2"><img width="1" height="6" src="img/1x1.gif" border="0"></td></tr>
                     <td align="center"><h2 style="background-color:white;color:#326491">Time Tracker</h2></td>
                     <tr valign="top">
 {if $user->custom_logo}
-                      <td height="55" align="center"><img alt="Time Tracker" width="300" height="43" src="{$custom_logo}" border="0"></td>
+                      <td height="55" align="center"><img alt="Time Tracker" width="300" height="75" src="{$custom_logo}" border="0"></td>
 {else}
                       <td height="55" align="center"><a href="https://www.avenity.com/" target="_blank"><img alt="Avenity Logo" width="300" height="43" src="img/logo.png" border="0"></a></td>
                       
