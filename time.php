@@ -115,7 +115,8 @@ if ($showNoteRow) {
   $smarty->assign('colspan', $colspan);
 }
 
-if ($user->isPluginEnabled('mq')){
+if ($user->isPluginEnabled('mq'))
+{
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
   $month_quota_minutes = $quota->getUserQuota($selected_date->mYear, $selected_date->mMonth); //
@@ -144,6 +145,7 @@ if ($user->isPluginEnabled('mq')){
   $smarty->assign('sicktime_accrual_rate', $cl_sicktime_accrual_rate);
   $smarty->assign('accrued_within_month', $cl_accrued_within_month);
 
+
   // *** use date function ***
   date_default_timezone_set('America/New_York');
 
@@ -169,6 +171,10 @@ if ($user->isPluginEnabled('mq')){
         'accrued_within_month' => $cl_accrued_within_month);
       $result = ttUserHelper::update($user_id, $fields); 
     }
+  }  
+  else if ($minutes_left > 0)
+  {
+    $cl_vacation_balance = $cl_vacation_balance - $minutes_left;
   }
   else
   {
