@@ -64,6 +64,7 @@ if ($request->isPost() && $userChanged) {
   $user->setOnBehalfUser($user_id);
 } else {
   $user_id = $user->getUser();
+  $user_details = $user->getUserDetails($user_id);
 }
 
 $group_id = $user->getGroup();
@@ -82,7 +83,7 @@ $showFiles = $user->isPluginEnabled('at');
 
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
-$selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date);
+$selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date); //
 if($selected_date->isError())
   $selected_date = new DateAndTime(DB_DATEFORMAT);
 if(!$cl_date)
@@ -114,22 +115,76 @@ if ($showNoteRow) {
   $smarty->assign('colspan', $colspan);
 }
 
-if ($user->isPluginEnabled('mq')){
+if ($user->isPluginEnabled('mq'))
+{
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
-  $month_quota_minutes = $quota->getUserQuota($selected_date->mYear, $selected_date->mMonth);
+  $month_quota_minutes = $quota->getUserQuota($selected_date->mYear, $selected_date->mMonth); //
   $quota_minutes_from_1st = $quota->getUserQuotaFrom1st($selected_date);
   $month_total = ttTimeHelper::getTimeForMonth($selected_date);
   $month_total_minutes = ttTimeHelper::toMinutes($month_total);
   $balance_left = $quota_minutes_from_1st - $month_total_minutes;
   $minutes_left = $month_quota_minutes - $month_total_minutes;
-  
+
+  $cl_vacation_balance = $user_details['vacation_balance'];
+  $cl_sicktime_balance = $user_details['sicktime_balance'];
+  $cl_vacation_accrual_rate = $user_details['vacation_accrual_rate'];
+  $cl_sicktime_accrual_rate = $user_details['sicktime_accrual_rate'];
+  $cl_accrued_within_month = $user_details['accrued_within_month'];
+
   $smarty->assign('month_total', $month_total);
   $smarty->assign('month_quota', ttTimeHelper::toAbsDuration($month_quota_minutes));
   $smarty->assign('over_balance', $balance_left < 0);
   $smarty->assign('balance_remaining', ttTimeHelper::toAbsDuration($balance_left));
   $smarty->assign('over_quota', $minutes_left < 0);
   $smarty->assign('quota_remaining', ttTimeHelper::toAbsDuration($minutes_left));
+
+  $smarty->assign('vacation_balance', $cl_vacation_balance);
+  $smarty->assign('sicktime_balance', $cl_sicktime_balance);
+  $smarty->assign('vacation_accrual_rate', $cl_vacation_accrual_rate);
+  $smarty->assign('sicktime_accrual_rate', $cl_sicktime_accrual_rate);
+  $smarty->assign('accrued_within_month', $cl_accrued_within_month);
+
+
+  // *** use date function ***
+  date_default_timezone_set('America/New_York');
+
+  // DEFAULT VALUE FOR $cl_accrued_within_month is FALSE
+  // 1 = TRUE
+  // 0 = FALSE
+  if ($minutes_left <= 0)
+  {
+    //$onceAMonth = getOnceAMonth($onceAMonth);
+    if ($cl_accrued_within_month == 1) // if pto/sick times already incremented within the month, pass thru
+    {
+      $cl_vacation_balance = $cl_vacation_balance;
+      $cl_sicktime_balance = $cl_sicktime_balance;
+    }
+    else // if not been incremented yet, accrue times. (null or false)
+    {
+      $cl_vacation_balance = $cl_vacation_balance + $cl_vacation_accrual_rate;
+      $cl_sicktime_balance = $cl_sicktime_balance + $cl_sicktime_accrual_rate;
+      $cl_accrued_within_month = 1;
+      $fields = array(
+        'vacation_balance' => $cl_vacation_balance,
+        'sicktime_balance' => $cl_sicktime_balance,
+        'accrued_within_month' => $cl_accrued_within_month);
+      $result = ttUserHelper::update($user_id, $fields); 
+    }
+  }  
+  else if ($minutes_left > 0)
+  {
+    $cl_vacation_balance = $cl_vacation_balance - $minutes_left;
+  }
+  else
+  {
+    $cl_vacation_balance = $cl_vacation_balance;
+    $cl_sicktime_balance = $cl_sicktime_balance;
+    $cl_accrued_within_month = 0;
+    $fields = array('accrued_within_month' => $cl_accrued_within_month);
+    $result = ttUserHelper::update($user_id, $fields); 
+    //return $onceAMonth;
+  }
 }
 
 // Initialize variables.

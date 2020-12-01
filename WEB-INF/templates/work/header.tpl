@@ -28,9 +28,9 @@
       <table cellspacing="0" cellpadding="0" width="100%" border="0">
         <tr>
 {if $user->custom_logo}
-          <td align="center">
+          <td align="center" bgcolor="#326491">
 {else}
-          <td bgcolor="#a6ccf7" background="../img/top_bg.gif" align="center">
+          <td bgcolor="#326491" background="../img/top_bg.gif" align="center">
 {/if}
             <table cellspacing="0" cellpadding="0" width="{$tab_width}" border="0">
               <tr>
@@ -39,7 +39,7 @@
                     <tr><td height="6" colspan="2"><img width="1" height="6" src="../img/1x1.gif" border="0"></td></tr>
                     <tr valign="top">
 {if $user->custom_logo}
-                      <td height="55" align="center"><img alt="Time Tracker" width="300" height="43" src="../{$custom_logo}" border="0"></td>
+                      <td height="55" align="center"><img alt="Time Tracker" width="300" height="50" src="../{$custom_logo}" border="0"></td>
 {else}
                       <td height="55" align="center"><a href="https://www.anuko.com/lp/tt_1.htm" target="_blank"><img alt="Anuko Time Tracker" width="300" height="43" src="../img/logo.png" border="0"></a></td>
 {/if}

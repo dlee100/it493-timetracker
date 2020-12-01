@@ -525,8 +525,11 @@ $i18n_key_words = array(
 'form.users.comanager' => 'Co-manager',
 'form.users.rate' => 'Rate',
 'form.users.default_rate' => 'Default hourly rate',
+'form.users.vacation_balance' => 'Vacation balance',
+'form.users.sicktime_balance' => 'Sicktime balance',
 'form.users.vacation_accrual_rate' => 'Vacation accrual rate',
 'form.users.sicktime_accrual_rate' => 'Sicktime accrual rate',
+// accrued_within_month ?
 
 // Editing User form. See example at https://timetracker.anuko.com/user_edit.php
 'form.user_edit.swap_roles' => 'Swap roles',
